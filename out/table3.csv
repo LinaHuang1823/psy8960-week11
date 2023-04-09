@@ -1,5 +1,5 @@
 algo,cv_rsq,ho_rsq
-lm,.18,.00
-glmnet,.86,.38
-ranger,.91,.47
-xgbTree,.97,.47
+lm,.27,.03
+glmnet,.88,.36
+ranger,.93,.59
+xgbTree,.96,.59
