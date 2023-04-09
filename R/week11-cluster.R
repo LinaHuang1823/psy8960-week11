@@ -53,7 +53,7 @@ model1<- time_model(train(
 ))
 
 model1_time <- model1$time
-model1_t_elapsed<-model1_time$everything["elapsed"] # extract execution time
+model1_t_elapsed<-round(model1_time$everything["elapsed"],2) # extract execution time
 
 # fit model 1 with Parallelization
 model1_par<- time_model(train(
@@ -66,7 +66,7 @@ model1_par<- time_model(train(
   allowParallel=TRUE
 ))
 model1_par_time <- model1_par$time
-model1_p_elapsed<-model1_par_time$everything["elapsed"] # extract time execution
+model1_p_elapsed<-round(model1_par_time$everything["elapsed"],2) # extract time execution
 
 # Holdout correlation reveals the real effectiveness of our model
 hocv_cor_1 <- cor(
@@ -85,7 +85,7 @@ model2<- time_model(train(
   trControl=trainControl(method="cv", number=10, indexOut=training_folds, verboseIter=T) 
 ))
 model2_time <- model2$time
-model2_t_elapsed<-model2_time$everything["elapsed"] # extract execution time
+model2_t_elapsed<-round(model2_time$everything["elapsed"],2) # extract execution time
 
 # fit model 2 with Parallelization
 model2_par<- time_model(train(
@@ -99,7 +99,7 @@ model2_par<- time_model(train(
   allowParallel=TRUE
 ))
 model2_par_time <- model2_par$time
-model2_p_elapsed<-model2_par_time$everything["elapsed"] # extract execution time
+model2_p_elapsed<-round(model2_par_time$everything["elapsed"],2) # extract execution time
 
 # Holdout correlation reveals the real effectiveness of our model
 hocv_cor_2 <- cor(
@@ -118,7 +118,7 @@ model3<- time_model(train(
   trControl=trainControl(method="cv", number=10, indexOut=training_folds, verboseIter=T) 
 ))
 model3_time <- model3$time
-model3_t_elapsed<-model3_time$everything["elapsed"] # extract execution time
+model3_t_elapsed<-round(model3_time$everything["elapsed"],2) # extract execution time
 
 # fit model 3 with Parallelization
 model3_par<- time_model(train(
@@ -132,7 +132,7 @@ model3_par<- time_model(train(
   allowParallel=TRUE
 ))
 model3_par_time <- model3_par$time
-model3_p_elapsed<-model3_par_time$everything["elapsed"] # extract execution time
+model3_p_elapsed<-round(model3_par_time$everything["elapsed"],2) # extract execution time
 
 # Holdout correlation reveals the real effectiveness of our model
 hocv_cor_3 <- cor(
@@ -151,7 +151,7 @@ model4<- time_model(train(
   trControl=trainControl(method="cv", number=10, indexOut=training_folds, verboseIter=T) 
 ))
 model4_time <- model4$time
-model4_t_elapsed<-model4_time$everything["elapsed"] # extract execution time
+model4_t_elapsed<-round(model4_time$everything["elapsed"],2) # extract execution time
 
 # fit model 4 with Parallelization
 model4_par<- time_model(train(
@@ -165,7 +165,7 @@ model4_par<- time_model(train(
   allowParallel=TRUE
 ))
 model4_par_time <- model4_par$time
-model4_p_elapsed<-model4_par_time$everything["elapsed"] # extract execution time 
+model4_p_elapsed<-round(model4_par_time$everything["elapsed"],2) # extract execution time 
 
 # Holdout correlation reveals the real effectiveness of our model
 hocv_cor_4 <- cor(
