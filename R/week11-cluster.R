@@ -207,7 +207,8 @@ table4<- tibble(
 table4
 
 #save tables to the out file
-write_csv(table3, "..out/table3.csv") #need to edit the error
-write_csv(table4, "..out/table4.csv")
+write_csv(table3, "../out/table3.csv") 
+write_csv(table4, "../out/table4.csv")
+
 
 
