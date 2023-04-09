@@ -7,6 +7,10 @@ library(tictoc)
 library(parallel)
 library(doParallel)
 
+# turn on parallel processing
+local_cluster <- makeCluster(7)
+registerDoParallel(local_cluster)
+
 # Data Import and Cleaning
 gss_import_tbl <- read_sav("../data/GSS2016.sav") %>%
   filter(!is.na(MOSTHRS))
@@ -174,6 +178,10 @@ summary(resamples(list(model1, model2, model3, model4)))
 resample_sum <- summary(resamples(list(model1, model2, model3, model4)))
 dotplot(resamples(list(model1, model2, model3, model4)))
 
+# turn off parallel processing
+stopCluster(local_cluster)
+registerDoSEQ()
+
 # Publication
 table1_tbl <- tibble(
   algo = c("lm","glmnet","ranger","xgbTree"),
@@ -198,16 +206,16 @@ table2_tbl <- tibble(
 table2_tbl
 
 #Which models benefited most from parallelization and why?
-#In this case, the xgbTree model benefited the most from parallelization, as its 
-#execution time decreased from 97.3 seconds to 91.7 seconds. Parallelization can 
+#In this case, the lm model benefited the most from parallelization, as its 
+#execution time decreased from 6.15 seconds to 2 seconds. Parallelization can 
 #help speed up the training process by using multiple cores to train the model 
 #simultaneously. The benefits of parallelization depend on the specific algorithm 
-#and its implementation. In this case, the xgbTree model has the most effective 
+#and its implementation. In this case, the lm model has the most effective 
 #parallel implementation among the four models.
 
 #How big was the difference between the fastest and slowest parallelized model? Why?
 #The difference between the fastest and slowest parallelized model is approximately 
-#89.72 seconds (91.7 seconds for xgbTree - 1.98 seconds for lm). The difference 
+#128 seconds (130 seconds for xgbTree - 2 seconds for lm). The difference 
 #in execution time can be attributed to the underlying algorithms and their complexity. 
 #The xgbTree algorithm is more complex than the lm algorithm, as it involves building 
 #multiple decision trees and optimizing them, while lm fits a linear regression model, 
@@ -221,7 +229,7 @@ table2_tbl
 #However, it also has the longest execution time in both original and parallelized versions, 
 #as seen in Table 2. Considering the trade-offs between performance and execution time, 
 #the glmnet model seems to be a good compromise. It has reasonable performance 
-#metrics (cv_rsq = .87, ho_rsq = .44) that are pretty close to the second-best performance 
-#and much shorter execution times (original = 4.11 seconds, parallelized = 4.42 seconds) 
+#metrics(cv_rsq = .86, ho_rsq = .57) that are pretty close to the second-best performance 
+#and much shorter execution times(original = 3.86 seconds, parallelized = 3.80 seconds)
 #compared to the xgbTree model.
 
