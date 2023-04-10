@@ -21,9 +21,6 @@ gss_tbl <-
 # Remove HRS1 and HRS2 columns from the dataset
 gss_tbl <- gss_tbl[ , !(names(gss_tbl) %in% c("HRS1", "HRS2"))]
 
-# Visualization
-ggplot(gss_tbl, aes(x=workhours)) + geom_histogram()
-
 # Analysis
 train_cases <- sample(1:nrow(gss_tbl), .75*nrow(gss_tbl))
 
@@ -210,5 +207,26 @@ table4
 write_csv(table3, "../out/table3.csv") 
 write_csv(table4, "../out/table4.csv")
 
+#Which models benefited most from moving to the supercomputer and why?
+#By looking at the output at the week11-cluster.Rout, it appears that the 
+#'lm' and 'ranger' models benefited the most from moving to the supercomputer because
+#these two model experienced greatest reduction in processing time. 
 
+#What is the relationship between time and the number of cores used?
+#In general, using more cores can lead to a reduction in execution time.
+#When a task can be divided into smaller sub-tasks that can be run in parallel, 
+#using more cores can lead to a reduction in the overall execution time. 
+#This is because each core can handle a separate sub-task simultaneously, 
+#thus allowing the entire task to be completed faster.However, the 
+#actual speedup achieved depends on factors such as the parallelism of the task, 
+#overhead, resource contention, and load balancing. 
+
+#If your supervisor asked you to pick a model for use in a production model, 
+#would you recommend using the supercomputer and why? Consider all four tables 
+#when providing an answer.
+#Based on the information provided in all four tables, I would recommend using 
+#the supercomputer supercomputer reduced execution times for all models without change
+#the performance metrics.I would recommend the 'ranger' (Random Forest) model for use, 
+#as it demonstrates a significant improvement in execution time when run on the supercomputer and 
+#good performance in terms of CV_rsq and holdout R-squared.
 
